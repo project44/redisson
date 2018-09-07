@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.cache.Cache;
 import javax.cache.CacheException;
@@ -51,6 +52,7 @@ import javax.cache.processor.EntryProcessorResult;
 
 import org.redisson.Redisson;
 import org.redisson.RedissonBaseMapIterator;
+import org.redisson.RedissonLock;
 import org.redisson.RedissonObject;
 import org.redisson.ScanResult;
 import org.redisson.api.RFuture;
@@ -739,9 +741,9 @@ public class JCache<K, V> extends RedissonObject implements Cache<K, V> {
     
     private RLock getLockedLock(K key) {
         String lockName = getLockName(key);
-        RLock lock = redisson.getLock(lockName);
+        RedissonLock lock = redisson.getLock(lockName);
         try {
-            lock.lock();
+            lock.lock( 5L, TimeUnit.SECONDS);
         } catch (Exception e) {
             throw new CacheException(e);
         }

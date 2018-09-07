@@ -362,7 +362,7 @@ public class Redisson implements RedissonClient {
     }
 
     @Override
-    public RLock getLock(String name) {
+    public RedissonLock getLock(String name) {
         return new RedissonLock(connectionManager.getCommandExecutor(), name);
     }
 

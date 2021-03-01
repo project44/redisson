@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.redisson</groupId>
         <artifactId>redisson-parent</artifactId>
-        <version>3.7.5.p44</version>
+        <version>3.7.5-1.p44</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -403,6 +403,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>true</skip>
                     <consoleOutput>true</consoleOutput>
                     <enableRSS>false</enableRSS>
                     <configLocation>/checkstyle.xml</configLocation>
